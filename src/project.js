@@ -16,29 +16,27 @@ function projectListSetup() {
     addNew.setAttribute("style", "border-radius: 2px;")
     addNew.innerHTML = "NEW";
     addNew.addEventListener("click", () => {
-        const name = prompt("Enter the name of the project: ");
+        let name = prompt("Enter the name of the project:");
         addProject(name);
         renderProject();
         console.log(projectList);
     });
     projectListDiv.appendChild(addNew);
     projectListDiv.appendChild(projList);
+    return false;
 }
 
 function renderProject() {
     const projectListDiv = document.getElementById("main-proj-list");
     let projectDiv = document.createElement("div");
     projectDiv.setAttribute("id", "project-div");
-    projectDiv.setAttribute("style", "border: dashed white 0.5px; margin: 10px;");
+    projectDiv.setAttribute("style", "border: dashed white 0.5px; margin: 10px; padding: 2px;");
     projectDiv.setAttribute("class", "project-div");
     projectDiv.dataset.id = projectList[0].id = ++projectNum;
     let projectTitle = document.createElement("h2");
     projectTitle.setAttribute("style", "text-align: center;")
     projectTitle.innerHTML = projectList[0].name;
-    let projectTasks = document.createElement("p");
-    projectTasks.innerHTML = projectList[0].tasks;
     projectDiv.appendChild(projectTitle);
-    projectDiv.appendChild(projectTasks);
     let delProject = document.createElement("button");
     delProject.setAttribute("id", "del-project");
     delProject.innerHTML = "Delete";
@@ -50,6 +48,7 @@ function renderProject() {
             }
         }
         projectListDiv.removeChild(projectDiv);
+        console.log(projectList);
     });
     projectDiv.appendChild(delProject);
     projectListDiv.appendChild(projectDiv);
@@ -63,7 +62,6 @@ function addProject (name) {
 
 function Project () {
     this.name = "";
-    this.tasks = [];
     this.id = 0;
 }
 
